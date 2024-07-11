@@ -1,24 +1,38 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 20px;
     background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 
 form {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #cityInput {
     padding: 10px;
     font-size: 16px;
+    margin-right: 10px;
 }
 
 button {
@@ -35,21 +49,58 @@ button:hover {
     background-color: #45a049;
 }
 
-#weather {
+.weather-card {
     margin-top: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
+    background-color: #f0f0f0;
     border-radius: 10px;
-    width: 300px;
-    background-color: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-h2 {
-    margin: 0;
-    font-size: 1.5em;
+.weather-card img {
+    width: 100px;
+    height: 100px;
 }
 
-p {
-    margin: 5px 0;
+.forecast-cards.horizontal {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.forecast-cards.vertical {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.forecast-card {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.forecast-card img {
+    width: 50px;
+    height: 50px;
+}
+
+@media (max-width: 600px) {
+    .forecast-cards.horizontal {
+        flex-wrap: nowrap;
+    }
 }
