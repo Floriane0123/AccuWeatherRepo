@@ -102,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayHourlyForecast(data) {
         const hourlyContent = data.map(hour => `
-
             <div class="hourly-card">
                 <p class="hour">${new Date(hour.DateTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
                 <img src="https://developer.accuweather.com/sites/default/files/${hour.WeatherIcon < 10 ? '0' + hour.WeatherIcon : hour.WeatherIcon}-s.png" alt="${hour.IconPhrase}" />
@@ -110,26 +109,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p class="phrase">${hour.IconPhrase}</p>
             </div>
         `).join('');
-        hourlyForecastDiv.innerHTML = hourlyContent;
+        hourlyForecastDiv.innerHTML = `
+            <header><h2>Hourly Forecast</h2></header>
+            <div class="forecast-cards horizontal">${hourlyContent}</div>
+        `;
     }
 
     function displayDailyForecast(data) {
-      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-      const dailyContent = data.map(day => {
-        const dayOfWeek = daysOfWeek[new Date(day.Date).getDay()];
-        return `
-            <div class="forecast-card">
-                <p>${dayOfWeek}<br>
-                High ${day.Temperature.Maximum.Value}°C, Low ${day.Temperature.Minimum.Value}°C</p>
-                <img src="https://developer.accuweather.com/sites/default/files/${day.Day.Icon < 10 ? '0' + day.Day.Icon : day.Day.Icon}-s.png" alt="${day.Day.IconPhrase}" />
-                <p>${day.Day.IconPhrase}</p>
-            </div>
+        const dailyContent = data.map(day => {
+            const dayOfWeek = daysOfWeek[new Date(day.Date).getDay()];
+            return `
+                <div class="forecast-card">
+                    <p>${dayOfWeek}<br>
+                    High ${day.Temperature.Maximum.Value}°C, Low ${day.Temperature.Minimum.Value}°C</p>
+                    <img src="https://developer.accuweather.com/sites/default/files/${day.Day.Icon < 10 ? '0' + day.Day.Icon : day.Day.Icon}-s.png" alt="${day.Day.IconPhrase}" />
+                    <p>${day.Day.IconPhrase}</p>
+                </div>
+            `;
+        }).join('');
+        dailyForecastDiv.innerHTML = `
+            <header><h2>Daily Forecast</h2></header>
+            <div class="forecast-cards vertical">${dailyContent}</div>
         `;
-      }).join('');
-      dailyForecastDiv.innerHTML = dailyContent;
     }
-
 
     function displayError(message) {
         currentWeatherDiv.innerHTML = `<p>${message}</p>`;
